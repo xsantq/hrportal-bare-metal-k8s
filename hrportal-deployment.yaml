@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hrportal
+  labels:
+    app: hrportal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hrportal
+  template:
+    metadata:
+      labels:
+        app: hrportal
+    spec:
+      containers:
+      - name: hrportal
+        image: xsantq/hrportal:latest
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: docker-hub-secret
