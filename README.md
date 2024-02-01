@@ -36,6 +36,20 @@ Steps:
 
 -                 NAME         TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)          AGE
                   hrportal     LoadBalancer   10.100.133.63   192.168.254.140   8080:30771/TCP   19h
+- Actually the external IP in here (192.168.254.140) is a free IP in local network. Use nginx server as reverse proxy with public IP to expose this app to outside world. Sample nginx config was given below;
+-         server {
+                  listen 80;
+                  location / {
+                  proxy_pass http://192.168.254.140:8080;
+                  }
+                }
+- write this config in file named custom.server.conf. Put this config file to  the path /etc/nginx/sites-enabled
+- create a symlink for nginx, so nginx can take this config file into account:
+  
+-         sudo ln -s /etc/nginx/sites-available/custom_server.conf /etc/nginx/sites-enabled/custom.server.conf
+
+- Now hrportal application is exposed with the public IP of Nginx
+-          http://ip_of_nginx
 
   
    
