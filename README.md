@@ -24,8 +24,9 @@ Steps:
             protocol: layer2
             addresses:
             -  192.168.254.140-192.168.254.150
-- kubectl create -f metallb.yaml
-  In this config MetalLB run in layer2 mode. Layer2 mode works in failover mode rather than loadbalancing. If the endpoint service of one node fails,    MetalLB makes the other node leader node and re-directs request to this node. BGP modes requires physical loadbalancers with hardware.  
+
+-     kubectl create -f metallb.yaml
+- In this config MetalLB run in layer2 mode. Layer2 mode works in failover mode rather than loadbalancing. If the endpoint service of one node fails,    MetalLB makes the other node leader node and re-directs request to this node. BGP modes requires physical loadbalancers with hardware.  
   
 - Create hrportal deployment
 -         kubectl apply -f hrportal-deployment.yaml
