@@ -25,7 +25,7 @@ Steps:
             addresses:
             -  192.168.254.140-192.168.254.150
 - kubectl create -f metallb.yaml
-  In this config MetalLB run in layer2 mode. BGP modes requires loadbalancing hardware. In this project nginx server is used as LB
+  In this config MetalLB run in layer2 mode. Layer2 mode works in failover mode rather than loadbalancing. If the endpoint service of one node fails,    MetalLB makes the other node leader node and re-directs request to this node. BGP modes requires physical loadbalancers with hardware.  
   
 - Create hrportal deployment
 -         kubectl apply -f hrportal-deployment.yaml
@@ -36,7 +36,7 @@ Steps:
 
 -                 NAME         TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)          AGE
                   hrportal     LoadBalancer   10.100.133.63   192.168.254.140   8080:30771/TCP   19h
-- Actually the external IP in here (192.168.254.140) is a free IP in local network. Use nginx server as reverse proxy with public IP to expose this app to outside world. Sample nginx config was given below;
+- In this project nginx server is used as LB.  Actually the external IP in here (192.168.254.140) is a free IP in local network. Use nginx server as reverse proxy with public IP to expose this app to outside world. Sample nginx config was given below;
 -         server {
                   listen 80;
                   location / {
