@@ -5,7 +5,23 @@ Loadbalancing and Ingress work in cloud environments(AWS,GCP,Azure) by default. 
 is used for to make the cluster accessible from outside world.
 
 Steps: 
-- Enable strict ARP mode of kube-proy
+- Enable strict ARP mode of kube-proxy
 -     kubectl edit configmap -n kube-system kube-proxy
-- Create a configmap for METAL LB
-- 
+- Create a namespace for MetalLB
+-     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
+- Install MetalLB system resources
+-     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml
+- Create a configmap for MetalLB
+-       apiVersion: v1
+        kind: ConfigMap
+        metadata:
+        namespace: metallb-system
+        name: config
+        data:
+          config: |
+            address-pools:
+            - name: default
+            protocol: layer2
+            addresses:
+            -  192.168.254.140-192.168.254.150
+
