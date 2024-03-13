@@ -8,7 +8,7 @@ pipeline {
  stages {
   stage('Checkout portalhr from Github') {
    steps {
-    git branch: 'master', changelog: false, poll: false, url: 'https://github.com/xsantq/hrportal-bare-metal-k8s.git'
+    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/xsantq/hrportal-bare-metal-k8s.git'
    }
   }
 
